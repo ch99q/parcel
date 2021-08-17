@@ -13,9 +13,9 @@
     "build-app": "yarn parcel build index.html"
   },
   "dependencies": {
-    "@parcel/integration-tests": "^2.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "@parcel/integration-tests": "2.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "victory": "^31.0.1"
   },
   "devDependencies": {

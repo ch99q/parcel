@@ -2321,3 +2321,33 @@ describe('resolver', function () {
     });
   });
 });
+
+describe('resolver multiple extensions', function() {
+  let resolver;
+
+  beforeEach(async function() {
+    await setup();
+
+    resolver = new NodeResolver({
+      fs: overlayFS,
+      projectRoot: rootDir,
+      mainFields: ['browser', 'source', 'module', 'main'],
+      extensions: ['.native.js', '.js', '.json'],
+    });
+
+    configCache.clear();
+  });
+
+  it('should support having extensions with multiple points', async function() {
+    let resolved = await resolver.resolve({
+      env: BROWSER_ENV,
+      filename: './foo',
+      specifierType: 'esm',
+      parent: path.join(rootDir, 'foo.js'),
+    });
+    assert.equal(
+      nullthrows(resolved).filePath,
+      path.join(rootDir, 'foo.native.js'),
+    );
+  });
+});
